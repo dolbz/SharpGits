@@ -4,7 +4,22 @@ public class Database
 {
     public static void Init(string workspacePath)
     {
-        // TODO Create git database directory and appropriate subdirs.
-        throw new NotImplementedException();
+        var gitDir = Path.Combine(workspacePath, ".git");
+
+        if (Directory.Exists(gitDir))
+        {
+            return;
+        }
+
+        Directory.CreateDirectory(gitDir);
+
+        var refsDir = Path.Combine(gitDir, "refs");
+        var objectssDir = Path.Combine(gitDir, "objects");
+
+        Directory.CreateDirectory(refsDir);
+        Directory.CreateDirectory(objectssDir);
+
+        var headFile = Path.Combine(gitDir, "HEAD");
+        File.WriteAllText(headFile, "ref: refs/heads/main\n");
     }
 }
