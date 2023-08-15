@@ -23,6 +23,7 @@ public class GivenThereIsASerializedBlobToDeserialize : WhenTestingBlobSerialize
     public void ThereIsASerializedBlob()
     {
         // Git Blob representing a file containing "Hello World\n"
+        //                               b     l     o     b  <spc>    1     2 <null>    H     e     l     l     o  <spc>    W     o     r     l     d    \n
         serializedBlob = new byte[] { 0x62, 0x6c, 0x6f, 0x62, 0x20, 0x31, 0x32, 0x00, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x20, 0x57, 0x6f, 0x72, 0x6c, 0x64, 0x0a };
     }
 
