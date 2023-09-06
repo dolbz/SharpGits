@@ -2,7 +2,7 @@ using SharpGits.Console.GitObjects;
 
 namespace SharpGits.Console.Data;
 
-public class BlobSerializer
+public class BlobSerializer : IBlobSerializer
 {
     public byte[] Serialize(Blob blob)
     {
