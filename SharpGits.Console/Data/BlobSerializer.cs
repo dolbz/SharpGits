@@ -31,8 +31,10 @@ public class BlobSerializer : IBlobSerializer
         {
             throw new ArgumentException($"Invalid git blob passed in to {nameof(BlobSerializer)}", nameof(blobBytes));
         }
+        var blobLengthBytes = blobBytes.Skip(5).TakeWhile(x => x != 0).ToArray();
+        var blobLength = int.Parse(new string(Encoding.ASCII.GetChars(blobLengthBytes)));
 
-        var blobContent = blobBytes.SkipWhile(x => x != 0x0).Skip(1).ToArray();
+        var blobContent = blobBytes.SkipWhile(x => x != 0x0).Skip(1).Take(blobLength).ToArray();
 
         return new Blob
         {

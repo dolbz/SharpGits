@@ -1,5 +1,6 @@
 using SharpGits.Console.Verbs;
 using SharpGits.Console.Repository;
+using SharpGits.Console.GitObjects;
 
 namespace SharpGits.Console.CommandHandlers;
 
@@ -14,6 +15,16 @@ public class CommitCommandHandler
 
     public int HandleCommand(CommitOptions commitOptions)
     {
-        throw new NotImplementedException();
+        var files = gitRepo.Workspace.ListFiles();
+        foreach (var file in files)
+        {
+            var fileBytes = File.ReadAllBytes(file);
+            var blob = new Blob
+            {
+                Content = fileBytes
+            };
+            gitRepo.Database.StoreObject(blob);
+        }
+        return 0;
     }
 }
