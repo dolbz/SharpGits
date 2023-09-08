@@ -4,6 +4,7 @@ using LeapingGorilla.Testing.NUnit.Attributes;
 using NUnit.Framework;
 using SharpGits.Console.GitObjects;
 using SharpGits.Tests.Extensions;
+using SharpGits.Tests.Utilities;
 
 namespace SharpGits.Tests.DatabaseTests.BlobSerializerTests;
 
@@ -27,17 +28,9 @@ public class GivenABlobToSerialize : WhenTestingBlobSerializer
     [Given]
     public void ThereIsARandomBlobToBeSerialized()
     {
-        var rand = new Random();
-
         // Random blob of length 50 - 250 bytes
-        var blobContent = new byte[50 + (int)(rand.NextDouble() * 200)];
-        rand.NextBytes(blobContent);
-
-        theBlob = new Blob
-        {
-            Content = blobContent
-        };
-        contentLength = blobContent.Length;
+        theBlob = RandomBlobGenerator.GenerateBlob(minLength: 50, maxLength: 250);
+        contentLength = theBlob.Content.Length;
         contentLengthString = contentLength.ToString();
     }
 

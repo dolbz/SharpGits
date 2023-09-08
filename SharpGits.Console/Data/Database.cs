@@ -1,7 +1,13 @@
+using SharpGits.Console.GitObjects;
+
 namespace SharpGits.Console.Data;
 
 public class Database
 {
+    public Database(string workspacePath, IBlobSerializer blobSerializer)
+    {
+    }
+
     public static void Init(string workspacePath)
     {
         var gitDir = Path.Combine(workspacePath, ".git");
@@ -21,5 +27,10 @@ public class Database
 
         var headFile = Path.Combine(gitDir, "HEAD");
         File.WriteAllText(headFile, "ref: refs/heads/main\n");
+    }
+
+    public void StoreObject(GitObject obj)
+    {
+        throw new NotImplementedException();
     }
 }
