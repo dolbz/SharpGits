@@ -4,6 +4,7 @@ using LeapingGorilla.Testing.NUnit.Attributes;
 using LeapingGorilla.Testing.NUnit.Composable;
 using NUnit.Framework;
 using SharpGits.Console.Data;
+using SharpGits.Tests.Utilities;
 
 namespace SharpGits.Tests.DatabaseTests.DatabaseInitTests;
 
@@ -21,11 +22,7 @@ public class WhenTestingDatabaseInit : ComposableTestingTheBehaviourOf
     [Given]
     public void ThereIsADirectoryToInitANewGitRepo()
     {
-        var rootTempPath = Path.GetTempPath();
-        var tempRepoDir = Guid.NewGuid().ToString();
-
-        repoDirectory = Path.Combine(rootTempPath, tempRepoDir);
-        Directory.CreateDirectory(repoDirectory);
+        repoDirectory = RepoHelper.CreateTemporaryRepo(initialized: false);
     }
 
     [When]

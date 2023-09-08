@@ -16,5 +16,6 @@ public class Database
 
     public void StoreObject(GitObject obj)
     {
+        throw new NotImplementedException();
     }
 }

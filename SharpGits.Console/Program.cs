@@ -1,5 +1,7 @@
 ﻿using CommandLine;
 using SharpGits.Console.Data;
+using SharpGits.Console.CommandHandlers;
+using SharpGits.Console.Repository;
 using SharpGits.Console.Verbs;
 
 Parser parser = new(s => { s.AutoVersion = false; });
@@ -21,8 +23,8 @@ static int RunInit(InitOptions options)
 
 static int RunCommit(CommitOptions options)
 {
-    // TODO revisit this later. It only currently only exists so we have two CLI commands and therefore uses the correct MapResult() overload
-    return 1;
+    var commitHandler = new CommitCommandHandler(new GitRepo(Directory.GetCurrentDirectory()));
+    return commitHandler.HandleCommand(options);
 }
 
 static int NotParsed(IEnumerable<Error> errors, string[] args)

@@ -3,7 +3,7 @@ using CommandLine;
 namespace SharpGits.Console.Verbs;
 
 [Verb("commit")]
-class CommitOptions
+public class CommitOptions
 {
     // TODO
 }
